@@ -11,12 +11,12 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
-          headerTransparent: true,
+          // headerTransparent: true,
           headerTitle: null,
-          headerShown: false,
+          // headerShown: false,
         }}>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="SignupAs" component={LocationScreen} />
+        <Stack.Screen name="HomeScreen" component={HomeScreen} />
+        <Stack.Screen name="LocationScreen" component={LocationScreen} />
 
 
       </Stack.Navigator>
