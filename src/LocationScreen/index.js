@@ -1,44 +1,43 @@
-import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import React, { useCallback, useState } from 'react';
+import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React, {useCallback, useState} from 'react';
 import GoogleLocationComponent from '../components/GooglePlacesInput.js';
 
-const LocationScreen = ({ navigation }) => {
-  const [location,setLocation]=useState(null);
-  const [location1,setLocation1]=useState(null);
+const LocationScreen = ({navigation, route}) => {
+  const {updateState} = route.params;
   const data = [
     {
-      id:1,
-      value:'Enter Current Location'
+      id: 1,
+      value: 'Enter Current Location',
+      onPress: val => setLocation(val),
+      state: 'pickCords',
     },
     {
-      id:2,
-      value:'Enter Pickup Location'
-    }
+      id: 2,
+      value: 'Enter Pickup Location',
+      onPress: val => setLocation1(val),
+      state: 'pickCordsDrop',
+    },
   ];
-
-
-  console.log(location,'deitalisks'); 
-  console.log(location1,'deitalisks1'); 
+  console.log(updateState, 'askjalkdjaklsjd');
 
   return (
     <View style={styles.container}>
       <FlatList
         data={data}
         keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => (
-          <GoogleLocationComponent
-          setLocationFunction={item.id==1?setLocation:setLocation1}
-          placeholder={item.value} />
+        renderItem={({item}) => (
+          <GoogleLocationComponent updateState={updateState} item={item} />
         )}
-        ListFooterComponent={()=>{
-          return(
-            <TouchableOpacity style={styles.juniorContainer} onPress={() => navigation.goBack()}>
-            <Text>Done</Text>
-          </TouchableOpacity>
-          )
+        ListFooterComponent={() => {
+          return (
+            <TouchableOpacity
+              style={styles.juniorContainer}
+              onPress={() => navigation.goBack()}>
+              <Text>Done</Text>
+            </TouchableOpacity>
+          );
         }}
       />
-   
     </View>
   );
 };
